@@ -139,6 +139,8 @@ A **Bug Tracker System** built with **Spring Boot**, **JPA/Hibernate**, and a **
 - **Java 11+** installed on your system.
 - **Maven** for building the project.
 - **MySQL** database running locally or remotely.
+- **H2 DAtabase (Optional)** database running locally or remotely in Memeory.
+- **POSTMAN** fetching API's and Testing API's.
 
 ### Clone the repository
 ```bash
