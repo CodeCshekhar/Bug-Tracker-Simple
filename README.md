@@ -17,6 +17,7 @@ A **Bug Tracker System** built with **Spring Boot**, **JPA/Hibernate**, and a **
 - **Spring Boot**: The main framework used for building the application.
 - **Spring Data JPA**: For interacting with the MySQL database.
 - **MySQL**: Database for storing user, priority, and bug data.
+- **H2 DATABASE (Optional)**: Database for storing user, priority, and bug data in Memory.
 - **Lombok**: For reducing boilerplate code.
 - **Postman**: For API testing.
 - **Hibernate**: ORM framework used for data access.
