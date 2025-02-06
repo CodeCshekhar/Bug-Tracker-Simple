@@ -6,6 +6,31 @@
     <title>Add Bug</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .container {
+    max-width: 550px;
+}
+
+textarea {
+    height: 120px;
+}
+
+button {
+    width: 100%;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    textarea {
+        height: 100px;
+    }
+}
+</style>
 <body>
 <div class="container">
     <h1>Add Bug</h1>
@@ -34,7 +59,6 @@
     </form>
     <div id="message"></div>
 </div>
-
 <script>
     document.getElementById('add-bug-form').addEventListener('submit', function(event) {
         event.preventDefault();

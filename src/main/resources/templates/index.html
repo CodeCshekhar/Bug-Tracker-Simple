@@ -6,6 +6,43 @@
     <title>Bug Tracker Home</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .container {
+    max-width: 500px;
+}
+
+ul {
+    padding: 0;
+}
+
+ul li {
+    background: white;
+    padding: 12px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+}
+
+a {
+    font-size: 1.2rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    ul li {
+        font-size: 1rem;
+    }
+
+    a {
+        font-size: 1.1rem;
+    }
+}
+</style>
 <body>
 <div class="container">
     <h1>Welcome to Bug Tracker</h1>
