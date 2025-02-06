@@ -39,8 +39,7 @@ A **Bug Tracker System** built with **Spring Boot**, **JPA/Hibernate**, and a **
 │   │   │   │   │   │   ├── BugTrackerApplication.java
 │   │   │   │   │   │   ├── controller
 │   │   │   │   │   │   │   ├── BugController.java
-│   │   │   │   │   │   │   ├── PriorityController.java
-│   │   │   │   │   │   │   ├── UserController.java
+│   │   │   │   │   │   │   ├── PageController.java   
 │   │   │   │   │   │   ├── model
 │   │   │   │   │   │   │   ├── Bug.java
 │   │   │   │   │   │   │   ├── Priority.java
@@ -55,7 +54,7 @@ A **Bug Tracker System** built with **Spring Boot**, **JPA/Hibernate**, and a **
 │   │   │   │   │   │   │   ├── UserService.java
 │   ├── resources
 │   │   ├── application.properties
-│   ├── static
+│   ├── templates
 |   |   ├── index.html
 │   │   ├── styles.css
 |   |   ├── app.js
