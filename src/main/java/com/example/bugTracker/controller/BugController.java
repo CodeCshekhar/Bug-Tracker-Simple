@@ -11,12 +11,11 @@ import java.util.List;
 @RequestMapping("/bugs")
 public class BugController {
 
-    @Autowired
-    private BugService bugService;
+    private final BugService bugService;
 
-    @PostMapping
-    public Bug createBug(@RequestBody Bug bug) {
-        return bugService.createBug(bug);
+    @Autowired
+    public BugController(BugService bugService) {
+        this.bugService = bugService;
     }
 
     @GetMapping
@@ -24,8 +23,28 @@ public class BugController {
         return bugService.getAllBugs();
     }
 
+    @GetMapping("/{id}")
+    public Bug getBugById(@PathVariable Long id) {
+        return bugService.getBugById(id);
+    }
+
+    @PostMapping
+    public Bug createBug(@RequestBody Bug bug) {
+        return bugService.createBug(bug);
+    }
+
+    @PutMapping("/{id}")
+    public Bug updateBug(@PathVariable Long id, @RequestBody Bug bug) {
+        return bugService.updateBug(id, bug);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteBug(@PathVariable Long id) {
         bugService.deleteBug(id);
+    }
+
+    @PostMapping("/{bugId}/assign/{userId}")
+    public Bug assignBugToUser(@PathVariable Long bugId, @PathVariable Long userId) {
+        return bugService.assignBugToUser(bugId, userId);
     }
 }

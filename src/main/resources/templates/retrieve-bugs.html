@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieve Bugs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Bug List</h1>
+    <div id="bugs-list"></div>
+    <button onclick="loadBugs()">Load Bugs</button>
+</div>
+<script>
+    function loadBugs() {
+        fetch('/bugs')
+            .then(response => response.json())
+            .then(bugs => {
+                const bugList = document.getElementById('bugs-list');
+                bugList.innerHTML = '';  // Clear the previous list
+                bugs.forEach(bug => {
+                    const bugElement = document.createElement('div');
+                    bugElement.classList.add('bug-item');
+                    bugElement.innerHTML = `
+                        <h3>${bug.title}</h3>
+                        <p>${bug.description}</p>
+                        <p>Status: ${bug.status}</p>
+                        <p>Assigned User: ${bug.assignedUser ? bug.assignedUser.name : 'None'}</p>
+                    `;
+                    bugList.appendChild(bugElement);
+                });
+            })
+            .catch(error => console.error('Error loading bugs:', error));
+    }
+</script>
+</body>
+</html>

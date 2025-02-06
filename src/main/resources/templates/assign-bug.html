@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Bug</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Assign Bug to User</h1>
+    <form id="assign-bug-form">
+        <div>
+            <label for="bugId">Bug ID:</label>
+            <input type="number" id="bugId" required>
+        </div>
+        <div>
+            <label for="userId">User ID:</label>
+            <input type="number" id="userId" required>
+        </div>
+        <button type="submit">Assign Bug</button>
+    </form>
+    <div id="assign-message"></div>
+</div>
+<script>
+    document.getElementById('assign-bug-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const bugId = document.getElementById('bugId').value;
+        const userId = document.getElementById('userId').value;
+
+        fetch(`/bugs/${bugId}/assign/${userId}`, {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('assign-message').innerText = 'Bug assigned successfully!';
+            document.getElementById('assign-bug-form').reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('assign-message').innerText = 'Error assigning bug.';
+        });
+    });
+</script>
+</body>
+</html>
