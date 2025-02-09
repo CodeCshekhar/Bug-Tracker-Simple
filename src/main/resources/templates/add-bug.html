@@ -4,36 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Bug</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
 </head>
 <style>
-    .container {
-    max-width: 550px;
+    /* General Styles */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhR2r_AxpNvOVm8Ohqttr4fUHYw8SXUm9KEA&s"); /* Add your background image path */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 textarea {
     height: 120px;
+    resize: none;
 }
 
 button {
     width: 100%;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+    color: green;
 }
 
 /* Responsive */
 @media screen and (max-width: 768px) {
     .container {
-        width: 90%;
+        width: 95%;
         padding: 15px;
     }
-
-    textarea {
-        height: 100px;
+    h1 {
+        font-size: 1.8rem;
+    }
+    button {
+        font-size: 0.9rem;
     }
 }
 </style>
 <body>
 <div class="container">
     <h1>Add Bug</h1>
+    <div>
+        <label>Priority:</label><br>
+        <input type="radio" name="priority" value="High" checked> High<br>
+        <input type="radio" name="priority" value="Medium"> Medium<br>
+        <input type="radio" name="priority" value="Low"> Low<br>
+    </div>
+
     <form id="add-bug-form">
         <div>
             <label for="title">Title:</label>
@@ -52,8 +140,9 @@ button {
             </select>
         </div>
         <div>
-            <label for="user_id">User Id:</label>
-            <input type="number" id="user_id" required>
+            <label for="userName">User Name:</label>
+            <input type="text" id="userName" required>
+
         </div>
         <button type="submit">Add Bug</button>
     </form>
@@ -64,7 +153,12 @@ button {
         event.preventDefault();
 
         const bugData = {
+            userName: document.getElementById('userName').value,
+
             title: document.getElementById('title').value,
+            priority: document.querySelector('input[name="priority"]:checked').value, // Include priority
+
+
             description: document.getElementById('description').value,
             status: document.getElementById('status').value
         };
