@@ -15,7 +15,10 @@ public class Bug {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User assignedUser;
+    private User assignedUser; // Keep reference to User
+
+    @JoinColumn(name = "user_id")
+    private String assignedUserName; // Field to store the user's name
 
     @ManyToOne
     @JoinColumn(name = "priority_id")
@@ -29,7 +32,7 @@ public class Bug {
     public Long getId() {
         return id;
     }
-    // Add this setter so BugService can call setId()
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -56,11 +59,17 @@ public class Bug {
     }
 
     public User getAssignedUser() {
-        return assignedUser;
+        return assignedUser; // Getter for assignedUser
     }
-    // Add this setter so BugService can call setAssignedUser()
     public void setAssignedUser(User assignedUser) {
-        this.assignedUser = assignedUser;
+        this.assignedUser = assignedUser; // Setter for assignedUser
+    }
+
+    public String getAssignedUserName() {
+        return assignedUserName; // Getter for assignedUserName
+    }
+    public void setAssignedUserName(String assignedUserName) {
+        this.assignedUserName = assignedUserName; // Setter for assignedUserName
     }
 
     public Priority getPriority() {
