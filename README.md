@@ -17,7 +17,6 @@ A **Bug Tracker System** built with **Spring Boot**, **JPA/Hibernate**, and a **
 - **Spring Boot**: The main framework used for building the application.
 - **Spring Data JPA**: For interacting with the MySQL database.
 - **MySQL**: Database for storing user, priority, and bug data.
-- **H2 DATABASE (Optional)**: Database for storing user, priority, and bug data in Memory.
 - **Lombok**: For reducing boilerplate code.
 - **Postman**: For API testing.
 - **Hibernate**: ORM framework used for data access.
@@ -57,11 +56,11 @@ A **Bug Tracker System** built with **Spring Boot**, **JPA/Hibernate**, and a **
 │   ├── templates
 |   |   ├── index.html
 │   │   ├── styles.css
-|   |   ├── app.js
+|   |   ├── add-bug.html
+|   |   ├── retrieve-bug.html
 |   |
 |
 ```
-
 
 ## API Endpoints
 
@@ -138,17 +137,48 @@ A **Bug Tracker System** built with **Spring Boot**, **JPA/Hibernate**, and a **
 - **Java 11+** installed on your system.
 - **Maven** for building the project.
 - **MySQL** database running locally or remotely.
-- **H2 DAtabase (Optional)** database running locally or remotely in Memeory.
-- **POSTMAN** fetching API's and Testing API's.
+- **POSTMAN** for API testing.
+
+### Database Configuration
+```properties
+# MySQL Database Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/bug_tracker?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA/Hibernate Properties
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.properties.hibernate.format_sql=true
+```
 
 ### Clone the repository
 ```bash
 git clone https://github.com/CodeCshekhar/Bug-Tracker-Simple.git
 cd Bug-Tracker-Simple
 ```
-### Contributors
+
+### Build and Run
+1. Create a MySQL database named 'bug_tracker' (or let the application create it automatically)
+2. Update application.properties with your MySQL credentials
+3. Build the project: `mvn clean install`
+4. Run the application: `mvn spring-boot:run`
+
+### Dependencies
+Add this to your `pom.xml`:
+```xml
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.28</version>
+</dependency>
+```
+
+## Contributing
 - Chandrashekhar Wagh: Initial work and development of the Bug Tracker System.
 - If you'd like to contribute, feel free to fork this repository and submit a pull request with your changes. You can also open an issue for bug fixes or feature requests.
 
-### License
-- This project is licensed under the MIT License - see the LICENSE file for details.
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
