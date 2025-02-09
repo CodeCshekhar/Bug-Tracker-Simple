@@ -4,52 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bug Tracker Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
 </head>
 <style>
-    .container {
-    max-width: 500px;
+    /* General Styles */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhR2r_AxpNvOVm8Ohqttr4fUHYw8SXUm9KEA&s"); /* Add your background image path */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 20px;
 }
 
 ul {
+    list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 ul li {
     background: white;
-    padding: 12px;
-    margin: 5px 0;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    font-size: 1.1rem;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+ul li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 a {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
 }
 
 /* Responsive */
 @media screen and (max-width: 768px) {
     .container {
-        width: 90%;
+        width: 95%;
+        padding: 15px;
     }
-
+    h1 {
+        font-size: 1.8rem;
+    }
     ul li {
+        font-size: 0.95rem;
+    }
+    a {
         font-size: 1rem;
     }
-
-    a {
-        font-size: 1.1rem;
-    }
 }
+
 </style>
 <body>
 <div class="container">
     <h1>Welcome to Bug Tracker</h1>
     <ul>
-        <li><a href="add-bug">Add Bug</a></li>
-        <li><a href="retrieve-bugs">Retrieve Bugs</a></li>
-        <li><a href="assign-bug">Assign Bug</a></li>
+        <li><a href="/add-bug">Add Bug</a></li>
+        <li><a href="/retrieve-bugs">Retrieve Bugs</a></li>
     </ul>
 </div>
 </body>
