@@ -1,6 +1,8 @@
 package com.example.bugTracker.controller;
 
 import com.example.bugTracker.model.Bug;
+import com.example.bugTracker.model.User; // Import User model
+import com.example.bugTracker.service.UserService; // Import UserService
 import com.example.bugTracker.service.BugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,12 @@ import java.util.List;
 public class BugController {
 
     private final BugService bugService;
+    private final UserService userService; // Add UserService
 
     @Autowired
-    public BugController(BugService bugService) {
+    public BugController(BugService bugService, UserService userService) { // Inject UserService
         this.bugService = bugService;
+        this.userService = userService; // Initialize UserService
     }
 
     @GetMapping
@@ -29,7 +33,11 @@ public class BugController {
     }
 
     @PostMapping
-    public Bug createBug(@RequestBody Bug bug) {
+public Bug createBug(@RequestBody Bug bug) {
+    System.out.println("Creating bug with user name: " + bug.getAssignedUserName()); // Log user name
+
+        User user = userService.findByName(bug.getAssignedUserName()); // Find user by name
+        bug.setAssignedUser(user);
         return bugService.createBug(bug);
     }
 
