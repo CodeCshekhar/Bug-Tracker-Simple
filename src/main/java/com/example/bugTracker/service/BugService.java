@@ -1,7 +1,12 @@
 package com.example.bugTracker.service;
 
 import com.example.bugTracker.model.Bug;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.example.bugTracker.model.User;
+import com.example.bugTracker.model.Priority; // Import Priority model
+
 import com.example.bugTracker.repository.BugRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,22 +18,43 @@ import java.util.Optional;
 public class BugService {
 
     private final BugRepository bugRepository;
+    private static final Logger logger = LoggerFactory.getLogger(BugService.class);
+
     private final UserService userService;  // to lookup a user for assignment
+    private final PriorityService priorityService;  // to lookup a priority
 
     @Autowired
-    public BugService(BugRepository bugRepository, UserService userService) {
+    public BugService(BugRepository bugRepository, UserService userService, PriorityService priorityService) {
         this.bugRepository = bugRepository;
         this.userService = userService;
+        this.priorityService = priorityService; // Initialize priorityService
     }
 
     // Create a new bug
     public Bug createBug(Bug bug) {
+        User user = userService.findByName(bug.getAssignedUserName()); // Find user by name
+        logger.info("Creating bug with assigned user: {}", bug.getAssignedUserName());
+
+        if (user != null) {
+            bug.setAssignedUserName(user.getName()); // Set the assigned user's name
+        } else {
+            bug.setAssignedUserName("None"); // Set to "None" if user not found
+        }
+
         return bugRepository.save(bug);
     }
 
     // Get all bugs
     public List<Bug> getAllBugs() {
-        return bugRepository.findAll();
+        List<Bug> bugs = bugRepository.findAll();
+        for (Bug bug : bugs) {
+            User assignedUser = bug.getAssignedUser();
+            Priority priority = bug.getPriority(); // Get the priority for the bug
+
+            bug.setAssignedUserName(assignedUser != null ? assignedUser.getName() : "None"); // Set assignedUserName
+            bug.setPriority(priority); // Set the priority for the bug
+        }
+        return bugs;
     }
 
     // Get a bug by ID
@@ -58,6 +84,12 @@ public class BugService {
             return null;
         }
         User user = userService.getUserById(userId);
+        Priority priority = priorityService.getPriorityById(bug.getPriority().getId()); // Logic to get priority based on user input
+
+        bug.setPriority(priority); // Set the priority for the bug
+
+        logger.info("Assigning bug ID {} to user ID {}", bugId, userId);
+
         if (user == null) {
             return null;
         }

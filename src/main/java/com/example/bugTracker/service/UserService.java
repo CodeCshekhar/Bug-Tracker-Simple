@@ -43,7 +43,13 @@ public class UserService {
         return null;
     }
 
+    // Find a user by name
+    public User findByName(String name) {
+        return userRepository.findByName(name); // Assuming this method exists in UserRepository
+    }
+
     // Delete a user
+
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

@@ -4,33 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retrieve Bugs</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <style>
-    .container {
-    max-width: 650px;
+    /* General Styles */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhR2r_AxpNvOVm8Ohqttr4fUHYw8SXUm9KEA&s"); /* Add your background image path */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+#bugs-list {
+    text-align: left;
 }
 
 .bug-item {
     background: white;
-    padding: 12px;
+    padding: 15px;
     margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.bug-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 button {
     width: 100%;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #0056b3;
 }
 
 /* Responsive */
 @media screen and (max-width: 768px) {
     .container {
-        width: 90%;
+        width: 95%;
+        padding: 15px;
     }
-
+    h1 {
+        font-size: 1.8rem;
+    }
     .bug-item {
+        font-size: 0.95rem;
+    }
+    button {
         font-size: 0.9rem;
     }
 }
@@ -49,13 +105,21 @@ button {
                 const bugList = document.getElementById('bugs-list');
                 bugList.innerHTML = '';  // Clear the previous list
                 bugs.forEach(bug => {
+                    const assignedUser = bug.assignedUserName ? bug.assignedUserName : 'None';
+
+
                     const bugElement = document.createElement('div');
+                    const priority = bug.priority ? bug.priority.name : 'None'; // Get the priority
+
                     bugElement.classList.add('bug-item');
                     bugElement.innerHTML = `
                         <h3>${bug.title}</h3>
                         <p>${bug.description}</p>
                         <p>Status: ${bug.status}</p>
-                        <p>Assigned User: ${bug.assignedUser ? bug.assignedUser.name : 'None'}</p>
+                        <p>Assigned User: ${assignedUser}</p>
+                        <p>Priority: ${priority}</p> <!-- Display the priority -->
+
+
                     `;
                     bugList.appendChild(bugElement);
                 });
